@@ -1,0 +1,19 @@
+{
+  "name": "rofl-parser",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsup"
+  },
+  "repository": "git@github.com:gzordrai/rofl-parser.git",
+  "author": "gzordrai <gzordrai@users.noreply.github.com>",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.5"
+  }
+}
