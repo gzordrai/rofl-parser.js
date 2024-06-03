@@ -9,6 +9,15 @@
     "test": "jest"
   },
   "repository": "git@github.com:gzordrai/rofl-parser.git",
+  "keywords": [
+    "replay",
+    "rofl",
+    "parser",
+    "rofl-parser",
+    "rofl-parser.js",
+    "league of legends",
+    "riot"
+  ],
   "author": "gzordrai <gzordrai@users.noreply.github.com>",
   "license": "MIT",
   "dependencies": {},
