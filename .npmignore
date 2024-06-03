@@ -1,5 +1,7 @@
-/src
 /node_modules
+/src
+/tests
 
+jest.config.ts
 tsconfig.json
 tsup.config.ts
