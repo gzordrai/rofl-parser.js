@@ -5,23 +5,27 @@ import { Metadata } from "../types";
  * This class is used to parse a ROFL file
  */
 export class ROFLParser {
-    private static readonly signature: number[] = [ 0x52, 0x49, 0x4F, 0x54, 0x02, 0x00, 0x75, 0x1C, 0x08, 0xCD, 0x20, 0x99, 0xF8, 0x1C, 0x0E ];
-    private static readonly pattern: number[] = [ 0x7B, 0x22, 0x67, 0x61, 0x6D, 0x65, 0x4C, 0x65, 0x6E, 0x67, 0x74, 0x68, 0x22 ];
+    private static readonly signature: number[] = [0x52, 0x49, 0x4F, 0x54, 0x02, 0x00, 0x75, 0x1C, 0x08, 0xCD, 0x20, 0x99, 0xF8, 0x1C, 0x0E];
+    private static readonly pattern: number[] = [0x7B, 0x22, 0x67, 0x61, 0x6D, 0x65, 0x4C, 0x65, 0x6E, 0x67, 0x74, 0x68, 0x22];
     private file: Buffer;
 
     /**
      * This constructor is used to create a new instance of the ROFLParser class
      * 
-     * @param path The path to the ROFL file
+     * @param pathOrBuffer The path to the ROFL file or the buffer of the file
      */
-    public constructor(path: string) {
-        if (!existsSync(path))
-            throw new Error(`File ${path} does not exist`);
+    public constructor(pathOrBuffer: string | Buffer) {
+        if (Buffer.isBuffer(pathOrBuffer)) {
+            this.file = pathOrBuffer;
+        } else {
+            if (!existsSync(pathOrBuffer))
+                throw new Error(`File ${pathOrBuffer} does not exist`);
 
-        if (!path.endsWith(".rofl"))
-            throw new Error(`File is not a ROFL file`);
+            if (!pathOrBuffer.endsWith(".rofl"))
+                throw new Error(`File is not a ROFL file`);
 
-        this.file = readFileSync(path);
+            this.file = readFileSync(pathOrBuffer);
+        }
 
         if (!this.checkSignature())
             throw new Error(`This file is not a valid ROFL file`);

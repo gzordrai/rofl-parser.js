@@ -1,6 +1,17 @@
+import { readFileSync } from "fs";
 import { ROFLParser } from "../src";
 
 describe("ROFLParser", () => {
+    test("should create a new instance of ROFLParser", () => {
+        expect(() => new ROFLParser("./tests/assets/valid_file_test.rofl")).not.toThrow(Error);
+    });
+
+    test("should create a new instance of ROFLParser with buffer", () => {
+        const buffer: Buffer = readFileSync("./tests/assets/valid_file_test.rofl");
+
+        expect(() => new ROFLParser(buffer)).not.toThrow(Error);
+    });
+
     test("should throw error if file does not exist", () => {
         expect(() => new ROFLParser("./tests/assets/nonexistent.rofl")).toThrow(Error);
     });
