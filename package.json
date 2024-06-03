@@ -1,5 +1,5 @@
 {
-  "name": "rofl-parser",
+  "name": "rofl-parser.js",
   "version": "1.0.0",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
