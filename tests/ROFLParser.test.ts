@@ -1,5 +1,5 @@
 import { readFileSync } from "fs";
-import { ROFLParser } from "../src";
+import { Metadata, ROFLParser } from "../src";
 
 describe("ROFLParser", () => {
     test("should create a new instance of ROFLParser", () => {
@@ -26,6 +26,13 @@ describe("ROFLParser", () => {
 
     test("should check metadata", () => {
         expect(() => new ROFLParser("./tests/assets/invalid_metadata_file_test.rofl").parse()).toThrow(Error);
+    });
+
+    test("should return a Metadata instance", () => {
+        const parser: ROFLParser = new ROFLParser("./tests/assets/valid_file_test.rofl");
+        const metadata: Metadata = parser.parse();
+    
+        expect(metadata).toBeInstanceOf(Metadata);
     });
 
     test("should find pattern in the file", () => {
