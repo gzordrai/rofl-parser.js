@@ -1,5 +1,6 @@
 import { existsSync, readFileSync } from "fs";
-import { Metadata } from "../types";
+import { RawMetadata } from "../types";
+import { Metadata } from "./Metadata";
 
 /**
  * This class is used to parse a ROFL file
@@ -60,10 +61,10 @@ export class ROFLParser {
             throw new Error(`Metadata not found in the file`);
 
         const rowMetadata: Buffer = this.file.subarray(position, this.file.length - 4);
-        const metadata: Metadata = JSON.parse(rowMetadata.toString());
+        const metadata: RawMetadata = JSON.parse(rowMetadata.toString());
 
         metadata.statsJson = JSON.parse(metadata.statsJson as string);
 
-        return metadata;
+        return new Metadata(metadata);
     }
 }
