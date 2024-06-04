@@ -60,10 +60,8 @@ export class ROFLParser {
         if (position === -1)
             throw new Error(`Metadata not found in the file`);
 
-        const rowMetadata: Buffer = this.file.subarray(position, this.file.length - 4);
-        const metadata: RawMetadata = JSON.parse(rowMetadata.toString());
-
-        metadata.statsJson = JSON.parse(metadata.statsJson as string);
+        const rawMetadata: Buffer = this.file.subarray(position, this.file.length - 4);
+        const metadata: RawMetadata = JSON.parse(rawMetadata.toString());
 
         return new Metadata(metadata);
     }
