@@ -1,2 +1,2 @@
 export * from "./Metadata";
-export * from "./ROFLParser";
+export * from "./ROFLReader";
