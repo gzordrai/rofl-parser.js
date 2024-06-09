@@ -16,9 +16,9 @@ bun add rofl-parser.js
 Javascript
 
 ```js
-const { ROFLParser } = require('rofl-parser.js');
-const parser = new ROFLParser('./path_to_your_rofl_file.rofl');
-const metadata = parser.parse();
+const { ROFLReader } = require('rofl-parser.js');
+const reader = new ROFLReader('./path_to_your_rofl_file.rofl');
+const metadata = reader.getMetadata();
 
 console.log(metadata);
 ```
@@ -26,10 +26,10 @@ console.log(metadata);
 Typescript
 
 ```ts
-import { Metadata, ROFLPaser } from "rofl-parser.js";
+import { Metadata, ROFLReader } from "rofl-parser.js";
 
-const parser: ROFLPaser = new ROFLPaser("./path_to_your_rofl_file.rofl");
-const metadata: Metadata = parser.parse();
+const reader: ROFLReader = new ROFLReader("./path_to_your_rofl_file.rofl");
+const metadata: Metadata = reader.getMetadata();
 
 console.log(metadata);
 ```
