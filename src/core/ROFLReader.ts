@@ -44,10 +44,27 @@ export class ROFLReader {
      * @returns {Parser} The appropriate parser.
      */
     private determineParser(): Parser {
-        const pattern: RegExp = /^\d{2}\.\d{2}$/;
-        const isNewParser: boolean = pattern.test(this.file.subarray(15, 20).toString());
+        const pattern: RegExp = /^(\d{2})\.(\d{1,2})$/;
+        const versionString: string = this.file.subarray(15, 20).toString();
+        const version: string = versionString.endsWith(".") ? versionString.slice(0, -1) : versionString;
+        const match: RegExpExecArray | null = pattern.exec(version);
 
-        if (isNewParser)
+        if (!match) {
+            console.error(`Version string does not match the expected pattern: ${versionString}`);
+
+            return new OldRoflParser(this.file);
+        }
+
+        const majorVersion: number = parseInt(match[1], 10);
+        const minorVersion: number = parseInt(match[2], 10);
+
+        if (majorVersion === 14 && minorVersion === 10) {
+            console.error(`This version of ROFL files is not supported: ${versionString}. Riot removed metadata in version 14.10 and reintroduced it in version 14.11.`);
+
+            throw new Error(`Unsupported ROFL version: ${versionString}`);
+        }
+
+        if (majorVersion > 14 || (majorVersion == 14 && minorVersion >= 11))
             return new NewROFLParser(this.file);
 
         return new OldRoflParser(this.file);
